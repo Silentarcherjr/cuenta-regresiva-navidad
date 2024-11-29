@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clonar Repositorio') {
             steps {
-                git 'https://github.com/Silentarcherjr/cuenta-regresiva-navidad.git'
+                git branch: 'main', url: 'https://github.com/Silentarcherjr/cuenta-regresiva-navidad.git'
             }
         }
         stage('Construir') {
@@ -18,3 +18,4 @@ pipeline {
         }
     }
 }
+
