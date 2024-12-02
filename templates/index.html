@@ -4,30 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuenta Regresiva para Navidad</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ffecd2, #fcb69f);
-            color: #333;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 1.5rem;
-        }
-        .countdown {
-            font-size: 2.5rem;
-            color: #ff5722;
-            font-weight: bold;
-        }
-    </style>
+    <!-- Enlace al CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script>
+        const christmas = new Date("December 25, 2023 00:00:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const timeLeft = christmas - now;
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            document.getElementById("countdown").innerHTML = `${days} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+        }, 1000);
+    </script>
 </head>
 <body>
     <h1>🎄 Cuenta Regresiva para Navidad 🎅</h1>
+    <p>{{ message }}</p>
     <p>Faltan <span class="countdown">{{ days_remaining }}</span> días para Navidad.</p>
+    <p id="countdown"></p>
+
+    <!-- Lista de preparativos -->
+    <h2>Lista de Preparativos:</h2>
+    <ul>
+        <li><input type="checkbox"> Decorar el árbol</li>
+        <li><input type="checkbox"> Comprar regalos</li>
+        <li><input type="checkbox"> Preparar la cena</li>
+    </ul>
+
+    <!-- Idea de regalo -->
+    <h3>Idea de regalo:</h3>
+    <p>{{ random_gift }}</p>
+
+    <!-- Formulario para nombre del usuario -->
+    <form method="POST">
+        <label for="name">Ingresa tu nombre:</label>
+        <input type="text" id="name" name="name" placeholder="Escribe tu nombre">
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h2>¡Hola {{ name }}! ¡Disfruta de la Navidad! 🎁</h2>
 </body>
 </html>
