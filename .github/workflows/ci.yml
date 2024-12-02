@@ -1,0 +1,36 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Clona el repositorio
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Configura el entorno Node.js (si es un proyecto JS)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Instala dependencias
+      - name: Install dependencies
+        run: npm install
+
+      # Ejecuta pruebas (si tienes)
+      - name: Run tests
+        run: npm test
+
+      # Compila el proyecto (si es necesario)
+      - name: Build project
+        run: npm run build
