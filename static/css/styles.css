@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+    color: #333;
+    text-align: center;
+    padding: 50px;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.5rem;
+}
+
+.countdown {
+    font-size: 2.5rem;
+    color: #ff5722;
+    font-weight: bold;
+}
+
+/* Copos de nieve */
+.snowflake {
+    color: white;
+    font-size: 1.5em;
+    position: absolute;
+    top: -50px;
+    animation: fall 10s linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
