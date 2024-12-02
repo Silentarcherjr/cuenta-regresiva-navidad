@@ -11,11 +11,17 @@
         setInterval(function() {
             const now = new Date().getTime();
             const timeLeft = christmas - now;
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-            document.getElementById("countdown").innerHTML = `${days} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = 
+                    `${days} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+            } else {
+                document.getElementById("countdown").innerHTML = "¡Feliz Navidad! 🎄🎅";
+            }
         }, 1000);
     </script>
 </head>
@@ -39,6 +45,7 @@
 
     <!-- Formulario para nombre del usuario -->
     <form method="POST">
+        {{ csrf_token() }}
         <label for="name">Ingresa tu nombre:</label>
         <input type="text" id="name" name="name" placeholder="Escribe tu nombre">
         <button type="submit">Enviar</button>
@@ -47,3 +54,4 @@
     <h2>¡Hola {{ name }}! ¡Disfruta de la Navidad! 🎁</h2>
 </body>
 </html>
+
