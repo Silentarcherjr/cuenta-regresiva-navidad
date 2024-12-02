@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request
 from datetime import datetime
 import random
+from flask_wtf.csrf import CSRFProtect
+import os
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = os.urandom(24)  # Genera una clave secreta única
+csrf = CSRFProtect(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def countdown_to_christmas():
@@ -43,3 +47,4 @@ def countdown_to_christmas():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
+
