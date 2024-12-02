@@ -34,3 +34,14 @@ jobs:
       # Compila el proyecto (si es necesario)
       - name: Build project
         run: npm run build
+
+      # Realiza el análisis de SonarCloud
+      - name: Run SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ 38a74b05d131450255ce1861dc778e9f823b4345 }}
+        with:
+          args: >
+            -Dsonar.projectKey=Silentarcherjr_cuenta-regresiva-navidad
+            -Dsonar.organization=utp
+            -Dsonar.host.url=https://sonarcloud.io
