@@ -15,7 +15,6 @@ def countdown_to_christmas():
     days_remaining = (christmas - today).days
     return render_template('index.html', days_remaining=days_remaining)
 
-# Solo necesario para entornos locales
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
 
