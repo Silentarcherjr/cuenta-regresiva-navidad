@@ -3,33 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuenta Regresiva para Navidad</title>
+    <title>Cuentas Regresivas: Navidad y Año Nuevo</title>
     <!-- Enlace al CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script>
         const christmas = new Date("December 25, 2023 00:00:00").getTime();
+        const newYear = new Date("January 1, 2024 00:00:00").getTime();
+
         setInterval(function() {
             const now = new Date().getTime();
-            const timeLeft = christmas - now;
-            if (timeLeft > 0) {
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-                document.getElementById("countdown").innerHTML = 
+            // Navidad
+            const timeLeftChristmas = christmas - now;
+            if (timeLeftChristmas > 0) {
+                const days = Math.floor(timeLeftChristmas / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeftChristmas % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeftChristmas % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeftChristmas % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown-christmas").innerHTML =
                     `${days} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
             } else {
-                document.getElementById("countdown").innerHTML = "¡Feliz Navidad! 🎄🎅";
+                document.getElementById("countdown-christmas").innerHTML = "¡Feliz Navidad! 🎄🎅";
+            }
+
+            // Año Nuevo
+            const timeLeftNewYear = newYear - now;
+            if (timeLeftNewYear > 0) {
+                const days = Math.floor(timeLeftNewYear / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeftNewYear % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeftNewYear % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeftNewYear % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown-new-year").innerHTML =
+                    `${days} días, ${hours} horas, ${minutes} minutos, ${seconds} segundos`;
+            } else {
+                document.getElementById("countdown-new-year").innerHTML = "¡Feliz Año Nuevo! 🎆🎉";
             }
         }, 1000);
     </script>
 </head>
 <body>
-    <h1>🎄 Cuenta Regresiva para Navidad 🎅</h1>
-    <p>{{ message }}</p>
-    <p>Faltan <span class="countdown">{{ days_remaining }}</span> días para Navidad.</p>
-    <p id="countdown"></p>
+    <h1>🎄 Cuentas Regresivas 🎆</h1>
+
+    <!-- Sección de Navidad -->
+    <section>
+        <h2>Navidad</h2>
+        <p>{{ message_christmas }}</p>
+        <p>Faltan <span class="countdown">{{ days_to_christmas }}</span> días para Navidad.</p>
+        <p id="countdown-christmas"></p>
+    </section>
+
+    <!-- Sección de Año Nuevo -->
+    <section>
+        <h2>Año Nuevo</h2>
+        <p>{{ message_new_year }}</p>
+        <p>Faltan <span class="countdown">{{ days_to_new_year }}</span> días para Año Nuevo.</p>
+        <p id="countdown-new-year"></p>
+    </section>
 
     <!-- Lista de preparativos -->
     <h2>Lista de Preparativos:</h2>
@@ -42,16 +73,7 @@
     <!-- Idea de regalo -->
     <h3>Idea de regalo:</h3>
     <p>{{ random_gift }}</p>
-
-    <!-- Formulario para nombre del usuario -->
-    <form method="POST">
-        {{ csrf_token() }}
-        <label for="name">Ingresa tu nombre:</label>
-        <input type="text" id="name" name="name" placeholder="Escribe tu nombre">
-        <button type="submit">Enviar</button>
-    </form>
-
-    <h2>¡Hola {{ name }}! ¡Disfruta de la Navidad! 🎁</h2>
 </body>
 </html>
+
 
